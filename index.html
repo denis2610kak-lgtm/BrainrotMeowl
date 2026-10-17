@@ -17,49 +17,48 @@
     }
 
     body {
-      background-color: #0c0a14;
+      background-color: #08060b;
       color: #ffffff;
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px;
+      padding: 12px 12px 80px 12px;
       overflow-x: hidden;
     }
 
-    /* Верхняя панель */
+    /* Шапка */
     .header {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
-      z-index: 10;
+      margin-bottom: 16px;
     }
 
-    .brand {
+    .brand-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     /* Аватарка Meowl */
-    .avatar-container {
-      width: 48px;
-      height: 48px;
+    .avatar {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      overflow: hidden;
       background: #181528;
+      border: 1px solid rgba(243, 156, 18, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 0 12px rgba(243, 156, 18, 0.25);
+      box-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
+      overflow: hidden;
     }
 
-    .avatar-container svg {
+    .avatar svg {
       width: 85%;
       height: 85%;
     }
@@ -71,28 +70,71 @@
     }
 
     .brand-title .title {
-      font-size: 17px;
+      font-size: 13px;
       font-weight: 800;
       color: #ffffff;
     }
 
     .brand-title .subtitle {
-      font-size: 17px;
+      font-size: 13px;
       font-weight: 800;
       color: #f39c12;
     }
 
-    /* Кнопки и баланс */
-    .controls {
+    /* Правые элементы шапки */
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      background: rgba(255, 255, 255, 0.05);
+    .coin-badge {
+      display: flex;
+      align-items: center;
+      background: #14101a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 4px 10px 4px 6px;
+      gap: 6px;
+    }
+
+    .coin-icon {
+      width: 22px;
+      height: 22px;
+      background: #f1c40f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: #000;
+    }
+
+    .coin-count {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .plus-coin {
+      width: 24px;
+      height: 24px;
+      background: #2ecc71;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .top-icon-btn {
+      width: 36px;
+      height: 36px;
+      background: #14101a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       display: flex;
@@ -101,124 +143,245 @@
       cursor: pointer;
     }
 
-    .icon-btn svg {
+    .top-icon-btn svg {
       width: 18px;
       height: 18px;
-      fill: #a099c0;
+      fill: #8c85b1;
     }
 
-    .balance-badge {
+    /* Кнопка Админки (скрыта по умолчанию) */
+    .admin-btn {
+      display: none; /* Отобразится только для админа через JS */
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 900;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Сетка кейсов */
+    .cases-grid {
+      width: 100%;
+      max-width: 440px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .case-card {
+      background: linear-gradient(180deg, #15111d 0%, #0d0a14 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .case-card:active {
+      transform: scale(0.97);
+    }
+
+    .case-top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #7b73a5;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .case-img-box {
+      width: 100%;
+      height: 90px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 6px 10px 6px 12px;
-      font-size: 15px;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .case-name {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #fff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .case-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 8px;
+      font-size: 11px;
+      color: #8c85b1;
+    }
+
+    .case-price {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #1c1626;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 800;
+      color: #f1c40f;
+    }
+
+    .case-price span {
+      font-size: 10px;
+      background: #f1c40f;
+      color: #000;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-info {
+      color: #2ecc71;
       font-weight: 700;
-      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 3px;
     }
 
-    .star-icon {
-      color: #ffb703;
-      font-size: 14px;
+    /* Нижняя навигация */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0b0810;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px max(8px, env(safe-area-inset-bottom)) 4px;
+      z-index: 100;
     }
 
-    .plus-btn {
-      color: #7b73a5;
-      font-size: 16px;
-      margin-left: 2px;
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: none;
+      border: none;
+      color: #635c87;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      flex: 1;
+      transition: color 0.2s;
+    }
+
+    .nav-item svg {
+      width: 22px;
+      height: 22px;
+      fill: #635c87;
+      transition: fill 0.2s;
+    }
+
+    .nav-item.active {
+      color: #f39c12;
+    }
+
+    .nav-item.active svg {
+      fill: #f39c12;
+    }
+
+    /* Модальное окно Админ Панели */
+    .admin-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-modal-content {
+      background: #14101d;
+      border: 1px solid #e74c3c;
+      border-radius: 20px;
+      padding: 20px;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+    }
+
+    .admin-modal-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #e74c3c;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-close-btn {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 20px;
       cursor: pointer;
     }
 
-    /* Карточка анонса открытия */
-    .maintenance-card {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(180deg, rgba(25, 21, 41, 0.8) 0%, rgba(15, 12, 26, 0.95) 100%);
-      border-radius: 24px;
-      padding: 50px 24px 60px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.5);
-      margin-top: 10px;
-      overflow: hidden;
-    }
-
-    /* Фоновый пиксельный Meowl */
-    .meowl-bg-svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 230px;
-      height: 290px;
-      opacity: 0.22;
-      pointer-events: none;
-      z-index: 1;
-      filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.4));
-    }
-
-    .card-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Стильная плашка статуса */
-    .status-badge {
-      background: rgba(243, 156, 18, 0.15);
-      border: 1px solid rgba(243, 156, 18, 0.4);
-      color: #f39c12;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 12px rgba(243, 156, 18, 0.2);
-    }
-
-    .maintenance-title {
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      margin-bottom: 16px;
-      color: #dfdbf7;
-      line-height: 1.1;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-    }
-
-    .maintenance-sub {
-      font-size: 16px;
-      color: #b3ace0;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .maintenance-desc {
+    .admin-input {
+      background: #08060b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px;
+      color: #fff;
       font-size: 14px;
-      color: #7870a3;
-      font-weight: 400;
-      max-width: 290px;
-      line-height: 1.4;
-      margin: 0 auto;
+      outline: none;
+    }
+
+    .admin-action-btn {
+      background: #2ecc71;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
-  <!-- Шапка -->
+  <!-- Шапка сайта -->
   <div class="header">
-    <div class="brand">
-      <div class="avatar-container">
+    <div class="brand-group">
+      <div class="avatar">
         <!-- Векторная иконка Meowl -->
         <svg viewBox="0 0 100 130">
           <polygon points="15,5 38,40 5,40" fill="#c08a3e"/>
@@ -245,56 +408,186 @@
       </div>
     </div>
 
-    <div class="controls">
-      <button class="icon-btn" id="settingsBtn">
-        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
-      </button>
-      <button class="icon-btn" id="soundBtn">
+    <div class="header-right">
+      <!-- Кнопка админки (только для @kot_lgromanchik2610Real) -->
+      <button class="admin-btn" id="adminPanelBtn" onclick="openAdminModal()">👑 Админ</button>
+
+      <div class="coin-badge">
+        <div class="coin-icon">B</div>
+        <span class="coin-count" id="userCoins">0</span>
+        <div class="plus-coin">+</div>
+      </div>
+      <div class="top-icon-btn">
         <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-      </button>
-      <div class="balance-badge">
-        <span class="star-icon">✦</span>
-        <span>0</span>
-        <span class="plus-btn">+</span>
+      </div>
+      <div class="top-icon-btn">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
       </div>
     </div>
   </div>
 
-  <!-- Карточка анонса открытия -->
-  <div class="maintenance-card">
-    <svg class="meowl-bg-svg" viewBox="0 0 100 130">
-      <polygon points="15,5 38,40 5,40" fill="#c08a3e"/>
-      <polygon points="85,5 62,40 95,40" fill="#c08a3e"/>
-      <polygon points="20,12 34,38 12,38" fill="#fff5ea"/>
-      <polygon points="80,12 66,38 88,38" fill="#fff5ea"/>
-      <rect x="15" y="30" width="70" height="90" rx="15" fill="#c08a3e"/>
-      <rect x="28" y="30" width="44" height="90" rx="8" fill="#fff5ea"/>
-      <circle cx="35" cy="52" r="14" fill="#1b2a1a"/>
-      <circle cx="35" cy="52" r="11" fill="#4caf50"/>
-      <circle cx="35" cy="52" r="7" fill="#0c140b"/>
-      <circle cx="31" cy="48" r="3.5" fill="#ffffff"/>
-      <circle cx="65" cy="52" r="14" fill="#1b2a1a"/>
-      <circle cx="65" cy="52" r="11" fill="#4caf50"/>
-      <circle cx="65" cy="52" r="7" fill="#0c140b"/>
-      <circle cx="61" cy="48" r="3.5" fill="#ffffff"/>
-      <polygon points="50,66 45,61 55,61" fill="#e8a598"/>
-      <path d="M44,72 Q50,76 56,72" stroke="#2c1e11" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    </svg>
-    
-    <div class="card-content">
-      <div class="status-badge">⚡ Скоро открытие</div>
-      <h1 class="maintenance-title">Готовим<br>запуск!</h1>
-      <p class="maintenance-sub">Приложение станет доступно уже совсем скоро.</p>
-      <p class="maintenance-desc">Мы дорабатываем кейсы и режимы. Следите за новостями в нашем канале!</p>
+  <!-- Список кейсов -->
+  <div class="cases-grid">
+    <!-- 1. Бесплатный кейс -->
+    <div class="case-card">
+      <div class="case-top-info">
+        <span>55 предм.</span>
+      </div>
+      <div class="case-img-box">
+        <svg viewBox="0 0 100 80" width="70">
+          <rect x="10" y="30" width="80" height="45" rx="8" fill="#1e4d2b" stroke="#2ecc71" stroke-width="3"/>
+          <path d="M10 45h80" stroke="#2ecc71" stroke-width="2"/>
+          <rect x="42" y="38" width="16" height="18" rx="3" fill="#f1c40f"/>
+        </svg>
+      </div>
+      <div class="case-name">Бесплатный</div>
+      <div class="case-footer">
+        <div class="timer-info">⏳ 7ч 44м</div>
+      </div>
+    </div>
+
+    <!-- 2. Драгон кейс -->
+    <div class="case-card">
+      <div class="case-top-info">
+        <span>18 предм.</span>
+      </div>
+      <div class="case-img-box">
+        <svg viewBox="0 0 100 80" width="70">
+          <rect x="10" y="30" width="80" height="45" rx="8" fill="#611a1a" stroke="#e74c3c" stroke-width="3"/>
+          <path d="M10 45h80" stroke="#e74c3c" stroke-width="2"/>
+          <circle cx="50" cy="52" r="8" fill="#f39c12"/>
+        </svg>
+      </div>
+      <div class="case-name">Драгон</div>
+      <div class="case-footer">
+        <div class="case-price"><span>B</span> 562</div>
+      </div>
+    </div>
+
+    <!-- 3. Тако кейс -->
+    <div class="case-card">
+      <div class="case-top-info">
+        <span>16 предм.</span>
+      </div>
+      <div class="case-img-box">
+        <svg viewBox="0 0 100 80" width="70">
+          <rect x="10" y="30" width="80" height="45" rx="8" fill="#4a154b" stroke="#9b59b6" stroke-width="3"/>
+          <path d="M10 45h80" stroke="#9b59b6" stroke-width="2"/>
+          <circle cx="50" cy="52" r="8" fill="#f39c12"/>
+        </svg>
+      </div>
+      <div class="case-name">Тако</div>
+      <div class="case-footer">
+        <div class="case-price"><span>B</span> 235</div>
+      </div>
+    </div>
+
+    <!-- 4. Нубини -->
+    <div class="case-card">
+      <div class="case-top-info">
+        <span>18 предм.</span>
+      </div>
+      <div class="case-img-box">
+        <svg viewBox="0 0 100 80" width="70">
+          <rect x="10" y="30" width="80" height="45" rx="8" fill="#1b4f72" stroke="#3498db" stroke-width="3"/>
+          <path d="M10 45h80" stroke="#3498db" stroke-width="2"/>
+          <circle cx="50" cy="52" r="8" fill="#f39c12"/>
+        </svg>
+      </div>
+      <div class="case-name">Нубини</div>
+      <div class="case-footer">
+        <div class="case-price"><span>B</span> 21</div>
+      </div>
+    </div>
+
+    <!-- 5. Лаки-блок -->
+    <div class="case-card">
+      <div class="case-top-info">
+        <span>17 предм.</span>
+      </div>
+      <div class="case-img-box">
+        <svg viewBox="0 0 100 80" width="70">
+          <rect x="10" y="30" width="80" height="45" rx="8" fill="#784212" stroke="#d35400" stroke-width="3"/>
+          <path d="M10 45h80" stroke="#d35400" stroke-width="2"/>
+          <circle cx="50" cy="52" r="8" fill="#f39c12"/>
+        </svg>
+      </div>
+      <div class="case-name">Лаки-блок</div>
+      <div class="case-footer">
+        <div class="case-price"><span>B</span> 291</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Нижняя панель навигации -->
+  <div class="nav-bar">
+    <button class="nav-item active" onclick="switchTab(this)">
+      <svg viewBox="0 0 24 24"><path d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z"/></svg>
+      Кейсы
+    </button>
+    <button class="nav-item" onclick="switchTab(this)">
+      <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
+      Инвентарь
+    </button>
+  </div>
+
+  <!-- Окно Админ Панели -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-modal-content">
+      <div class="admin-modal-title">
+        <span>⚡ Админ Панель</span>
+        <button class="admin-close-btn" onclick="closeAdminModal()">✕</button>
+      </div>
+      <p style="font-size: 12px; color: #aaa;">Добро пожаловать, Owner!</p>
+      
+      <input type="number" class="admin-input" id="addCoinsInput" placeholder="Количество монет (B)">
+      <button class="admin-action-btn" onclick="addAdminCoins()">Выдать себе монеты</button>
     </div>
   </div>
 
   <script>
+    // Твой ТГ Юзернейм
+    const ADMIN_USERNAME = "kot_lgromanchik2610Real";
+
+    function switchTab(element) {
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Логика проверки пользователя
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.expand();
-      tg.setHeaderColor('#0c0a14');
-      tg.setBackgroundColor('#0c0a14');
+      tg.setHeaderColor('#08060b');
+      tg.setBackgroundColor('#08060b');
+
+      // Получаем данные юзера из Telegram
+      const user = tg.initDataUnsafe?.user;
+      
+      if (user && user.username && user.username.toLowerCase() === ADMIN_USERNAME.toLowerCase()) {
+        // Если открыл именно ты — показываем кнопку Админа!
+        document.getElementById('adminPanelBtn').style.display = 'block';
+      }
+    } else {
+      // Для тестов в обычном браузере Acode можно включить кнопку принудительно:
+      document.getElementById('adminPanelBtn').style.display = 'block';
+    }
+
+    // Функции открытия/закрытия Админки
+    function openAdminModal() {
+      document.getElementById('adminModal').style.display = 'flex';
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function addAdminCoins() {
+      const amount = parseInt(document.getElementById('addCoinsInput').value) || 0;
+      const currentCoins = parseInt(document.getElementById('userCoins').innerText) || 0;
+      document.getElementById('userCoins').innerText = currentCoins + amount;
+      alert(`Выдано ${amount} монет!`);
+      closeAdminModal();
     }
   </script>
 </body>
