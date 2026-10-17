@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Brainrot Meowl</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: #0c0a14;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    /* Верхняя панель */
+    .header {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Аватарка Meowl */
+    .avatar-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #181528;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 12px rgba(243, 156, 18, 0.25);
+    }
+
+    .avatar-container svg {
+      width: 85%;
+      height: 85%;
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title .title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .brand-title .subtitle {
+      font-size: 17px;
+      font-weight: 800;
+      color: #f39c12;
+    }
+
+    /* Кнопки и баланс */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #a099c0;
+    }
+
+    .balance-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 6px 10px 6px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .star-icon {
+      color: #ffb703;
+      font-size: 14px;
+    }
+
+    .plus-btn {
+      color: #7b73a5;
+      font-size: 16px;
+      margin-left: 2px;
+      cursor: pointer;
+    }
+
+    /* Карточка анонса открытия */
+    .maintenance-card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(180deg, rgba(25, 21, 41, 0.8) 0%, rgba(15, 12, 26, 0.95) 100%);
+      border-radius: 24px;
+      padding: 50px 24px 60px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    /* Фоновый пиксельный Meowl */
+    .meowl-bg-svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 230px;
+      height: 290px;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.4));
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Стильная плашка статуса */
+    .status-badge {
+      background: rgba(243, 156, 18, 0.15);
+      border: 1px solid rgba(243, 156, 18, 0.4);
+      color: #f39c12;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(243, 156, 18, 0.2);
+    }
+
+    .maintenance-title {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      color: #dfdbf7;
+      line-height: 1.1;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+    }
+
+    .maintenance-sub {
+      font-size: 16px;
+      color: #b3ace0;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .maintenance-desc {
+      font-size: 14px;
+      color: #7870a3;
+      font-weight: 400;
+      max-width: 290px;
+      line-height: 1.4;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <div class="header">
+    <div class="brand">
+      <div class="avatar-container">
+        <!-- Векторная иконка Meowl -->
+        <svg viewBox="0 0 100 130">
+          <polygon points="15,5 38,40 5,40" fill="#c08a3e"/>
+          <polygon points="85,5 62,40 95,40" fill="#c08a3e"/>
+          <polygon points="20,12 34,38 12,38" fill="#fff5ea"/>
+          <polygon points="80,12 66,38 88,38" fill="#fff5ea"/>
+          <rect x="15" y="30" width="70" height="90" rx="15" fill="#c08a3e"/>
+          <rect x="28" y="30" width="44" height="90" rx="8" fill="#fff5ea"/>
+          <circle cx="35" cy="52" r="14" fill="#1b2a1a"/>
+          <circle cx="35" cy="52" r="11" fill="#4caf50"/>
+          <circle cx="35" cy="52" r="7" fill="#0c140b"/>
+          <circle cx="31" cy="48" r="3.5" fill="#ffffff"/>
+          <circle cx="65" cy="52" r="14" fill="#1b2a1a"/>
+          <circle cx="65" cy="52" r="11" fill="#4caf50"/>
+          <circle cx="65" cy="52" r="7" fill="#0c140b"/>
+          <circle cx="61" cy="48" r="3.5" fill="#ffffff"/>
+          <polygon points="50,66 45,61 55,61" fill="#e8a598"/>
+          <path d="M44,72 Q50,76 56,72" stroke="#2c1e11" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-title">
+        <span class="title">Brainrot</span>
+        <span class="subtitle">Meowl</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="icon-btn" id="settingsBtn">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
+      </button>
+      <button class="icon-btn" id="soundBtn">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      </button>
+      <div class="balance-badge">
+        <span class="star-icon">✦</span>
+        <span>0</span>
+        <span class="plus-btn">+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Карточка анонса открытия -->
+  <div class="maintenance-card">
+    <svg class="meowl-bg-svg" viewBox="0 0 100 130">
+      <polygon points="15,5 38,40 5,40" fill="#c08a3e"/>
+      <polygon points="85,5 62,40 95,40" fill="#c08a3e"/>
+      <polygon points="20,12 34,38 12,38" fill="#fff5ea"/>
+      <polygon points="80,12 66,38 88,38" fill="#fff5ea"/>
+      <rect x="15" y="30" width="70" height="90" rx="15" fill="#c08a3e"/>
+      <rect x="28" y="30" width="44" height="90" rx="8" fill="#fff5ea"/>
+      <circle cx="35" cy="52" r="14" fill="#1b2a1a"/>
+      <circle cx="35" cy="52" r="11" fill="#4caf50"/>
+      <circle cx="35" cy="52" r="7" fill="#0c140b"/>
+      <circle cx="31" cy="48" r="3.5" fill="#ffffff"/>
+      <circle cx="65" cy="52" r="14" fill="#1b2a1a"/>
+      <circle cx="65" cy="52" r="11" fill="#4caf50"/>
+      <circle cx="65" cy="52" r="7" fill="#0c140b"/>
+      <circle cx="61" cy="48" r="3.5" fill="#ffffff"/>
+      <polygon points="50,66 45,61 55,61" fill="#e8a598"/>
+      <path d="M44,72 Q50,76 56,72" stroke="#2c1e11" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    
+    <div class="card-content">
+      <div class="status-badge">⚡ Скоро открытие</div>
+      <h1 class="maintenance-title">Готовим<br>запуск!</h1>
+      <p class="maintenance-sub">Приложение станет доступно уже совсем скоро.</p>
+      <p class="maintenance-desc">Мы дорабатываем кейсы и режимы. Следите за новостями в нашем канале!</p>
+    </div>
+  </div>
+
+  <script>
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.expand();
+      tg.setHeaderColor('#0c0a14');
+      tg.setBackgroundColor('#0c0a14');
+    }
+  </script>
+</body>
+</html>
